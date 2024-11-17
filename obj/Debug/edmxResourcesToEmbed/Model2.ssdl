@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SchoolDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="Cid" />
+    </Key>
+    <Property Name="Cid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CName" Type="nvarchar" MaxLength="10" />
+    <Property Name="CSeats" Type="int" />
+    <Property Name="Password" Type="int" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="St_ID" />
+    </Key>
+    <Property Name="St_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="St_Name" Type="nvarchar" MaxLength="25" />
+    <Property Name="Cid" Type="int" />
+  </EntityType>
+  <Association Name="FK__Students__Cid__4BAC3F29">
+    <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
+    <End Role="Students" Type="Self.Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="Cid" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="Cid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SchoolDBModelStoreContainer">
+    <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Students__Cid__4BAC3F29" Association="Self.FK__Students__Cid__4BAC3F29">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
